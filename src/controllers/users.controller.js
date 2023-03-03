@@ -24,7 +24,7 @@ const remove = catchError(async(req, res) => {
 const update = catchError(async(req, res) => {
     const { id } = req.params;
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const user = await User.create({...req.body, password: hashedPassword},{ where: { id: id }, returning: true });
+    const user = await User.update({...req.body, password: hashedPassword},{ where: { id: id }, returning: true });
     return res.json(user)
 });
 
